@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Haiku Generator</title>
+</head>
+<body class="bg-gray-100 min-h-screen py-8 px-4">
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6 md:p-8">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Haiku Generator</h1>
+        
+        <form action="{{ url_for('haiku.generate') }}" method="post" class="mb-8">
+            <div class="mb-4">
+                <label for="prompt" class="block text-gray-700 font-medium mb-2">Enter a prompt for your haiku:</label>
+                <input type="text" id="prompt" name="prompt" placeholder="e.g., autumn leaves, morning dew" required 
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                Generate Haiku
+            </button>
+        </form>
+        
+        <div class="mt-10">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Past Haikus</h2>
+            {% if haikus %}
+                <div class="space-y-4">
+                {% for haiku in haikus %}
+                    <div class="bg-gray-50 p-4 rounded-md border-l-4 border-blue-500">
+                        <div class="whitespace-pre-line italic text-gray-700 mb-3">{{ haiku.text }}</div>
+                        <div class="flex justify-between text-sm text-gray-500">
+                            <span class="font-medium">Prompt: {{ haiku.prompt }}</span>
+                            <span>{{ haiku.created.strftime('%Y-%m-%d %H:%M') }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-gray-600">No haikus generated yet. Be the first to create one!</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
