@@ -1,3 +1,4 @@
+python==3.10
 annotated-types==0.7.0
 anyio==3.7.1
 blinker==1.9.0
