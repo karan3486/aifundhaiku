@@ -2,9 +2,9 @@ import os
 import datetime
 from pymongo import MongoClient
 from openai import OpenAI
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 # Load environment variables
-load_dotenv()
+# load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 class HaikuService:
     def __init__(self):
